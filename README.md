@@ -28,3 +28,6 @@
  
   * Email:        patient's email (name+age@gmail.com)
 
+  * d_id:         id of the doctor assigned to the patient
+  
+  * d_name:       name of the doctor assigned to the patient
