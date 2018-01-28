@@ -48,6 +48,7 @@ with open('patient_data.csv', 'r', encoding="utf8") as csv_read_file:
             # subtracted 627 to get number of entries in patient data
             # as a multiple of number of entries in doctor data
             number_of_patients = len(patient_names) - 627
+            # print(number_of_patients)
 
             # subtracted one because the first value is not a real value
             number_of_doctors = len(mac_test.doctors) - 1
@@ -59,7 +60,7 @@ with open('patient_data.csv', 'r', encoding="utf8") as csv_read_file:
             start = 0
             stop = start + patients_per_doctor
 
-            for j in range(number_of_doctors):
+            for j in range(number_of_doctors + 1):
 
                 for i in range(start, stop):
                     csv_writer.writerow({'p_id': uuid.uuid4(), 'Name': patient_names[i], 'Gender': patient_genders[i], 'Age': patient_ages[i], 'Email': patient_emails[i], 'd_id': d_ids[j], 'd_name': mac_test.doctors[j]})
