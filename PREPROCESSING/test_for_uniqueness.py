@@ -1,6 +1,17 @@
 import uuid
 import csv
 
+# in this file we will store 2 dictionaries
+# the first dictionary will contain d_ids as the key
+# and the assigned pcs as the value
+# the second dictionary will contain p_ids as the key
+# and the assigned d_ids as the value
+# this will then be imported in the accesses code
+# to be used throughout data generation
+
+doctors_pc = {}
+patients_doctor = {}
+
 mac_addresses = []
 d_ids = []
 p_ids = []
@@ -14,13 +25,19 @@ with open('generated_doctors_data.csv', 'r', encoding="utf8") as csv_read_file:
         d_ids.append(line['d_id'])
         mac_addresses.append(line['Assigned_PC'])
 
+        doctors_pc[line['d_id']] = line['Assigned_PC']
+        # print(doctors_pc)
 
-with open('/home/dipamvasani7/Desktop/generated_patient_data.csv', 'r', encoding='utf8') as csv_read_file:
+
+with open('generated_patient_data.csv', 'r', encoding='utf8') as csv_read_file:
 
     csv_reader = csv.DictReader(csv_read_file)
 
     for line in csv_reader:
         p_ids.append(line['p_id'])
+
+        patients_doctor[line['p_id']] = line['d_id']
+        # print(patients_doctor)
 
 # test if d_ids are unique
 print(len(d_ids))
