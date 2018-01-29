@@ -11,6 +11,7 @@ import csv
 
 doctors_pc = {}
 patients_doctor = {}
+doctors_grants = {}
 
 mac_addresses = []
 d_ids = []
@@ -26,6 +27,8 @@ with open('generated_doctors_data.csv', 'r', encoding="utf8") as csv_read_file:
         mac_addresses.append(line['Assigned_PC'])
 
         doctors_pc[line['d_id']] = line['Assigned_PC']
+        doctors_grants[line['d_id']] = [line['Accesses'], line['Grants']]
+        # print(doctors_grants)
         # print(doctors_pc)
 
 
