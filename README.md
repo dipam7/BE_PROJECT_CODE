@@ -14,9 +14,8 @@
 
   * Grants:      The total number of successful accesses by the doctor.
   
-  * Emergency_accesses_left: Every doctor only gets a fixed number of emergency accesses
 
-* ### generated_patient_data (number of patients is a multiple of number of doctors)
+* ### generated_patient_data.csv (number of patients is a multiple of number of doctors)
  
   * p_id:         a unique id assigned to every patient.
  
@@ -31,3 +30,19 @@
   * d_id:         id of the doctor assigned to the patient
   
   * d_name:       name of the doctor assigned to the patient
+
+* ### generated_access_data.csv
+
+  * p_id:               id of the patient whose data is being accessed
+  
+  * d_id:               id of the doctor accessing the data
+  
+  * location_of_access: pc used to access the data
+  
+  * time_of_access:     time at which data was accessed
+  
+  * data_requested:     kind of data requested (relevant, slightly-irrelevant, irrelevant)
+  
+  * emergency:          was the access made for an emergency case?
+  
+  * access_granted:     was access granted or denied?
