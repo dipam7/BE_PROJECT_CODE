@@ -29,7 +29,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
@@ -55,7 +55,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -99,7 +99,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 24)
+        hours_after = random.randint(22, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -110,7 +110,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -154,7 +154,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 24)
+        hours_after = random.randint(22, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -165,7 +165,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -238,7 +238,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
 
@@ -260,7 +260,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -303,7 +303,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 24)
+        hours_after = random.randint(22, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -314,7 +314,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -362,7 +362,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -406,7 +406,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -449,7 +449,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 24)
+        hours_after = random.randint(22, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -460,7 +460,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -502,7 +502,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 24)
+        hours_after = random.randint(22, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -513,7 +513,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
-        time = str(hours) + ":" + str(minutes).zfill(2)
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
