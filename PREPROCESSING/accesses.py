@@ -23,7 +23,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -49,7 +49,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -99,7 +99,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 23)
+        hours_after = random.randint(21, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -154,7 +154,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 23)
+        hours_after = random.randint(21, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -208,7 +208,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -254,7 +254,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -303,7 +303,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 23)
+        hours_after = random.randint(21, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -356,7 +356,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -400,7 +400,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         doctor = patients_doctor[key]
 
         # 9 am to 9 pm
-        hours = random.randint(9, 21)
+        hours = random.randint(9, 20)
         # random minutes
         minutes = random.randint(0, 59)
 
@@ -449,7 +449,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 23)
+        hours_after = random.randint(21, 23)
 
         available_hours = [hours_before, hours_after]
 
@@ -502,7 +502,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         hours_before = random.randint(0, 8)
 
         # after hostpial hours
-        hours_after = random.randint(22, 23)
+        hours_after = random.randint(21, 23)
 
         available_hours = [hours_before, hours_after]
 
