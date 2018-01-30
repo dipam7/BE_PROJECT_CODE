@@ -46,3 +46,8 @@
   * emergency:          was the access made for an emergency case?
   
   * access_granted:     was access granted or denied?
+  
+  
+* ### Histogram to show time distribution
+
+  ![alt text](https://github.com/dipam7/BE_PROJECT_CODE/blob/master/time_histogram.jpg "Time distribution")
