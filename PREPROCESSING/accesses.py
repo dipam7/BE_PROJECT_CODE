@@ -195,6 +195,21 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
 
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # 9 am to 9 pm
+        hours = random.randint(9, 20)
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+
     # average case 4:
     # doctor will access from his own pc
     # during hospital hours
@@ -448,10 +463,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # before hospital hours
         hours_before = random.randint(0, 8)
 
-        # after hostpial hours
-        hours_after = random.randint(21, 23)
-
-        available_hours = [hours_before, hours_before, hours_after]
+        available_hours = [hours_before, hours_before]
 
         hours = random.choice(available_hours)
 
@@ -487,6 +499,31 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 emergency = 'no'
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # before hospital hours
+        hours_before = random.randint(0, 8)
+
+        # after hostpial hours
+        hours_after = random.randint(21, 23)
+
+        available_hours = [hours_before, hours_before, hours_after]
+
+        hours = random.choice(available_hours)
+
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        random_pc = random.choice(non_hospital_macs)
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
 
     # average case 10:
     # outside hospital pc and everything else is good
@@ -544,10 +581,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # before hospital hours
         hours_before = random.randint(0, 8)
 
-        # after hostpial hours
-        hours_after = random.randint(21, 23)
-
-        available_hours = [hours_before, hours_before, hours_after]
+        available_hours = [hours_before, hours_before]
 
         hours = random.choice(available_hours)
 
@@ -630,7 +664,6 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 emergency = 'no'
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
-
 
     # this loop is for the worst case in our training set
     # no doctor will access data from his assigned pcs
