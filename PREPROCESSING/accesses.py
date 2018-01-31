@@ -101,7 +101,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # after hostpial hours
         hours_after = random.randint(21, 23)
 
-        available_hours = [hours_before, hours_after]
+        available_hours = [hours_before, hours_before, hours_after]
 
         hours = random.choice(available_hours)
 
@@ -156,7 +156,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # after hostpial hours
         hours_after = random.randint(21, 23)
 
-        available_hours = [hours_before, hours_after]
+        available_hours = [hours_before, hours_before, hours_after]
 
         hours = random.choice(available_hours)
 
@@ -305,7 +305,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # after hostpial hours
         hours_after = random.randint(21, 23)
 
-        available_hours = [hours_before, hours_after]
+        available_hours = [hours_before, hours_before, hours_after]
 
         hours = random.choice(available_hours)
 
@@ -451,7 +451,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # after hostpial hours
         hours_after = random.randint(21, 23)
 
-        available_hours = [hours_before, hours_after]
+        available_hours = [hours_before, hours_before, hours_after]
 
         hours = random.choice(available_hours)
 
@@ -488,6 +488,150 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
 
+    # average case 10:
+    # outside hospital pc and everything else is good
+    result = 'yes'
+    emergency = 'no'
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # 9 am to 9 pm
+        hours = random.randint(9, 20)
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        random_pc = random.choice(non_hospital_macs)
+
+        accesses = int(doctors_grants[doctor][0])
+        grants = int(doctors_grants[doctor][1])
+        # print(accesses)
+        # print(grants)
+
+        # if the grants are less than 75% then choose on random whether to
+        # give access or no
+        if grants < int(0.95 * accesses):
+            result = random.choice(['yes', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        # but if the grants are less than 30% of accesses
+        # never give access
+        if grants < int(0.3 * accesses):
+            # probability of no is greater
+            result = random.choice(['yes', 'no', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+
+    # average case 11:
+    # outside pc and wrong time
+    result = 'yes'
+    emergency = 'no'
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # before hospital hours
+        hours_before = random.randint(0, 8)
+
+        # after hostpial hours
+        hours_after = random.randint(21, 23)
+
+        available_hours = [hours_before, hours_before, hours_after]
+
+        hours = random.choice(available_hours)
+
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        random_pc = random.choice(non_hospital_macs)
+
+        accesses = int(doctors_grants[doctor][0])
+        grants = int(doctors_grants[doctor][1])
+        # print(accesses)
+        # print(grants)
+
+        # if the grants are less than 75% then choose on random whether to
+        # give access or no
+        if grants < int(0.95 * accesses):
+            result = random.choice(['yes', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        # but if the grants are less than 30% of accesses
+        # never give access
+        if grants < int(0.3 * accesses):
+            # probability of no is greater
+            result = random.choice(['yes', 'no', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+
+    # average case 12:
+    # outside pc and highly irrelevant
+    result = 'yes'
+    emergency = 'no'
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # 9 am to 9 pm
+        hours = random.randint(9, 20)
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        random_pc = random.choice(non_hospital_macs)
+
+        accesses = int(doctors_grants[doctor][0])
+        grants = int(doctors_grants[doctor][1])
+        # print(accesses)
+        # print(grants)
+
+        # if the grants are less than 75% then choose on random whether to
+        # give access or no
+        if grants < int(0.95 * accesses):
+            result = random.choice(['yes', 'no', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        # but if the grants are less than 30% of accesses
+        # never give access
+        if grants < int(0.3 * accesses):
+            # probability of no is greater
+            result = random.choice(['yes', 'no', 'no', 'no', 'no', 'no'])
+            if result == 'yes':
+                emergency = 'yes'
+            else:
+                emergency = 'no'
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+
+
     # this loop is for the worst case in our training set
     # no doctor will access data from his assigned pcs
     # outside hospital hours (24 hours time format)
@@ -504,7 +648,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # after hostpial hours
         hours_after = random.randint(21, 23)
 
-        available_hours = [hours_before, hours_after]
+        available_hours = [hours_before, hours_before, hours_after]
 
         hours = random.choice(available_hours)
 
@@ -515,6 +659,6 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        random_pc = random.choice(list(doctors_pc.keys()))
+        random_pc = random.choice(non_hospital_macs)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})

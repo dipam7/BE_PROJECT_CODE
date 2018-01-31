@@ -1,4 +1,5 @@
 import uuid
+import random
 import csv
 
 # in this file we will store 2 dictionaries
@@ -16,6 +17,19 @@ doctors_grants = {}
 mac_addresses = []
 d_ids = []
 p_ids = []
+non_hospital_macs = []
+
+
+def outrandomMAC():
+    return [0x07, 0x12, 0x5e,
+            random.randint(0x00, 0x7f),
+            random.randint(0x00, 0xff),
+            random.randint(0x00, 0xff)]
+
+
+def MACprettyprint(mac):
+    return ':'.join(map(lambda x: "%02x" % x, mac))
+
 
 with open('generated_doctors_data.csv', 'r', encoding="utf8") as csv_read_file:
 
@@ -41,6 +55,11 @@ with open('generated_patient_data.csv', 'r', encoding='utf8') as csv_read_file:
 
         patients_doctor[line['p_id']] = line['d_id']
         # print(patients_doctor)
+
+
+for i in range(len(d_ids)):
+    non_hospital_macs.append(MACprettyprint(outrandomMAC()))
+
 
 # test if d_ids are unique
 print(len(d_ids))

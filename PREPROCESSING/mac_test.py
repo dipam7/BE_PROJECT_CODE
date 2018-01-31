@@ -7,6 +7,7 @@ RANGE_OF_ACCESSES = 50000
 
 doctors = []
 specialities = ['Gynec', 'Dentist', 'Pediatrician', 'Neuro', 'Cardio']
+non_hospital_macs = []
 
 
 def randomMAC():
