@@ -18,20 +18,21 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
     # they will access data relevant to their specialization
     # there will be no emergency cases
     # and access will always be granted
-    for key in patients_doctor:
+    for i in range(5):
+        for key in patients_doctor:
 
-        doctor = patients_doctor[key]
+            doctor = patients_doctor[key]
 
-        # 9 am to 9 pm
-        hours = random.randint(9, 20)
-        # random minutes
-        minutes = random.randint(0, 59)
+            # 9 am to 9 pm
+            hours = random.randint(9, 20)
+            # random minutes
+            minutes = random.randint(0, 59)
 
-        # zfill is used because if minutes is in single digits
-        # a zero must be appended before it
-        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+            # zfill is used because if minutes is in single digits
+            # a zero must be appended before it
+            time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 1:
     # doctors will not access data from their own pc but
@@ -356,6 +357,21 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 emergency = 'no'
 
         csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+
+    for key in patients_doctor:
+
+        doctor = patients_doctor[key]
+
+        # 9 am to 9 pm
+        hours = random.randint(9, 20)
+        # random minutes
+        minutes = random.randint(0, 59)
+
+        # zfill is used because if minutes is in single digits
+        # a zero must be appended before it
+        time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
+
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 7:
     # own pc
