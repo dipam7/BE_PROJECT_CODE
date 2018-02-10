@@ -1,6 +1,8 @@
 import random
 from test_for_uniqueness import *
 
+# add column of doctor's speciality
+
 emergency = ''
 
 with open('generated_access_data.csv', 'w') as csv_write_file:

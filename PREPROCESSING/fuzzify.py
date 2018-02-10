@@ -67,35 +67,13 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
     for i in d_id_column:
         previous_history.append(int(doctors_grants[i][1]) / int(doctors_grants[i][0]))
 
-    for i, j in d_id_column, location_of_access:
+    for i, j in list(zip(d_id_column, location_of_access_column)):
         if doctors_pc[i] == j:
-            append(1)
+            location_of_access.append(1)
         elif j in mac_addresses:
-            append(0.5)
+            location_of_access.append(0.5)
         else:
-            append(0)
-    # for i in d_id_column:
-    #     if i == doctors_pc[]
-    # indexOfi = 0#for navigating 1st csv file
-    # for i in d_id_column:#previous history & location
-    #     index2 = 0#for navigating 2nd csv file
-    #     for j in d_id2_column:
-    #         if i == j:
-    #             previous_history.append(grants_column[index2]/accesses_column[index2])
-    #             if location_of_access_column[indexOfi]==location_of_access2_column[index2]:
-    #                 location_of_access.append(1)
-    #                 break
-    #             else:
-    #                 pc=re.split('[:]', location_of_access_column[indexOfi])
-    #                 print(pc[0])
-    #                 if pc[0] == "07":
-    #                     location_of_access.append(0)
-    #                     break
-    #                 else:
-    #                     location_of_access.append(0.5)
-    #                     break
-    #         index2 = index2 + 1
-    #     indexOfi = indexOfi + 1
+            location_of_access.append(0)
 
     for i in time_of_access_column:  # time of access column
 
@@ -106,5 +84,5 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
         else:
             time_of_access.append(0)
 
-        csv_writer.writerow({'data_requested': data_requested[index], 'location_of_access': 'static', 'time_of_access': time_of_access[index], 'emergency': emergency[index], 'previous_history': previous_history[index], 'access_granted': access_granted[index]})
+        csv_writer.writerow({'data_requested': data_requested[index], 'location_of_access': location_of_access[index], 'time_of_access': time_of_access[index], 'emergency': emergency[index], 'previous_history': previous_history[index], 'access_granted': access_granted[index]})
         index = index + 1
