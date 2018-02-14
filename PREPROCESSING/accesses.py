@@ -1,14 +1,14 @@
 import random
 from test_for_uniqueness import *
 
-# add column of doctor's speciality
+# print(spec_related_data['Cardio'][0][0])
 
 emergency = ''
 
 with open('generated_access_data.csv', 'w') as csv_write_file:
 
     # specify fieldnames
-    fieldnames = ['p_id', 'd_id', 'location_of_access', 'time_of_access', 'data_requested', 'emergency', 'access_granted']
+    fieldnames = ['p_id', 'd_id', 'location_of_access', 'time_of_access', 'Specialization', 'data_requested', 'emergency', 'access_granted']
 
     csv_writer = csv.DictWriter(csv_write_file, fieldnames=fieldnames)
 
@@ -34,7 +34,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # a zero must be appended before it
             time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 1:
     # doctors will not access data from their own pc but
@@ -87,7 +87,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             random_pc = random.choice(list(doctors_pc.keys()))
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 2:
     # same as average case 1 but instead of wrong computer
@@ -140,7 +140,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 3:
     # doctors will access data from wrong pc at the wrong time
@@ -197,7 +197,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -212,7 +212,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 4:
     # doctor will access from his own pc
@@ -260,7 +260,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # a zero must be appended before it
             time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 5:
     # doctors will access data from the wrong pc
@@ -308,7 +308,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 6:
     # same as average case 4 only instead of wrong pc
@@ -360,7 +360,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -375,7 +375,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 7:
     # own pc
@@ -424,7 +424,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 else:
                     emergency = 'no'
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 8:
     # wrong pc and highly irrelevant data
@@ -470,7 +470,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
 
     # average case 9:
     # wrong time and highly irrelevant data
@@ -519,7 +519,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -544,7 +544,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(non_hospital_macs)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
 
     # average case 10:
     # outside hospital pc and everything else is good
@@ -589,7 +589,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'slightly-irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 11:
     # outside pc and wrong time
@@ -639,7 +639,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 12:
     # outside pc and highly irrelevant
@@ -684,7 +684,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
 
     # this loop is for the worst case in our training set
     # no doctor will access data from his assigned pcs
@@ -715,4 +715,4 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(non_hospital_macs)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})

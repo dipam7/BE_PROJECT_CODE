@@ -2,22 +2,30 @@ import uuid
 import random
 import csv
 
-# in this file we will store 2 dictionaries
-# the first dictionary will contain d_ids as the key
-# and the assigned pcs as the value
-# the second dictionary will contain p_ids as the key
-# and the assigned d_ids as the value
-# this will then be imported in the accesses code
-# to be used throughout data generation
+# too many dictionaries are storing doctor id and could have been
+# combined, but they were not made at the same stage
+# and combining them now would lead to a lot of changes in a lot of
+# code so it's better we use them seperately
 
+# dictionary for doctors_ids and their assigned pcs
 doctors_pc = {}
+
+# dictionary for patient_ids and their assigned doctors
 patients_doctor = {}
+
+# dictionary for doctor_ids and their accesses and grants
 doctors_grants = {}
+
+# dictionary for doctor_ids and their specializations
+doctors_spec = {}
 
 mac_addresses = []
 d_ids = []
 p_ids = []
 non_hospital_macs = []
+
+# dictionary for specializations, their related data and sensitivity
+spec_related_data = {}
 
 
 def outrandomMAC():
@@ -42,6 +50,8 @@ with open('generated_doctors_data.csv', 'r', encoding="utf8") as csv_read_file:
 
         doctors_pc[line['d_id']] = line['Assigned_PC']
         doctors_grants[line['d_id']] = [line['Accesses'], line['Grants']]
+        doctors_spec[line['d_id']] = line['Speciality']
+        # print(doctors_spec)
         # print(doctors_grants)
         # print(doctors_pc)
 
@@ -55,6 +65,13 @@ with open('generated_patient_data.csv', 'r', encoding='utf8') as csv_read_file:
 
         patients_doctor[line['p_id']] = line['d_id']
         # print(patients_doctor)
+
+with open('relevance_data.csv', 'r', encoding='utf8') as csv_read_file:
+
+    csv_reader = csv.DictReader(csv_read_file)
+
+    for line in csv_reader:
+        spec_related_data[line['Specialization']] = [line['Related_data'].split(','), line['Sensitivity_score']]
 
 
 for i in range(len(d_ids)):
