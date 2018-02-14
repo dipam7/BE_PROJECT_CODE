@@ -1,7 +1,8 @@
 import random
 from test_for_uniqueness import *
 
-# print(spec_related_data['Cardio'][0][0])
+# you still have to add cases where patient is not assigned to the
+# doc but data is accessed
 
 emergency = ''
 
@@ -25,6 +26,12 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             doctor = patients_doctor[key]
 
+            data_type = 'relevant'
+
+            specialization = doctors_spec[doctor]
+
+            data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+
             # 9 am to 9 pm
             hours = random.randint(9, 20)
             # random minutes
@@ -34,7 +41,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # a zero must be appended before it
             time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 1:
     # doctors will not access data from their own pc but
@@ -56,6 +63,12 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             hours = random.randint(9, 20)
             # random minutes
             minutes = random.randint(0, 59)
+
+            data_type = 'relevant'
+
+            specialization = doctors_spec[doctor]
+
+            data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
 
             # zfill is used because if minutes is in single digits
             # a zero must be appended before it
@@ -87,7 +100,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             random_pc = random.choice(list(doctors_pc.keys()))
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 2:
     # same as average case 1 but instead of wrong computer
@@ -116,6 +129,12 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
+        data_type = 'relevant'
+
+        specialization = doctors_spec[doctor]
+
+        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
@@ -140,7 +159,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 3:
     # doctors will access data from wrong pc at the wrong time
@@ -176,6 +195,12 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # print(accesses)
         # print(grants)
 
+        data_type = 'relevant'
+
+        specialization = doctors_spec[doctor]
+
+        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+
         # if the grants are less than 80% then choose on random whether to
         # give access or no
         if grants < int(0.8 * accesses):
@@ -197,7 +222,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -208,11 +233,17 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # random minutes
         minutes = random.randint(0, 59)
 
+        data_type = 'relevant'
+
+        specialization = doctors_spec[doctor]
+
+        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 4:
     # doctor will access from his own pc
@@ -236,6 +267,18 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             grants = int(doctors_grants[doctor][1])
             # print(accesses)
             # print(grants)
+            data_type = 'slightly-irrelevant'
+
+            specialization = doctors_spec[doctor]
+
+            new_specs = list(spec_related_data.keys())
+            new_specs.remove(specialization)
+
+            data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+
+            data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+            data_requested = data1 + " + " + data2
 
             # if the grants are less than 90% then choose on random whether to
             # give access or no
@@ -260,7 +303,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # a zero must be appended before it
             time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 5:
     # doctors will access data from the wrong pc
@@ -287,6 +330,19 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # print(accesses)
         # print(grants)
 
+        data_type = 'slightly-irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+
+        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+        data_requested = data1 + " + " + data2
+
         # if the grants are less than 95% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
@@ -308,7 +364,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         random_pc = random.choice(list(doctors_pc.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 6:
     # same as average case 4 only instead of wrong pc
@@ -340,6 +396,18 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
         # print(grants)
+        data_type = 'slightly-irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+
+        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+        data_requested = data1 + " + " + data2
 
         # if the grants are less than 95% then choose on random whether to
         # give access or no
@@ -360,7 +428,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -371,11 +439,17 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # random minutes
         minutes = random.randint(0, 59)
 
+        data_type = 'relevant'
+
+        specialization = doctors_spec[doctor]
+
+        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 7:
     # own pc
@@ -404,6 +478,14 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             grants = int(doctors_grants[doctor][1])
             # print(accesses)
             # print(grants)
+            data_type = 'irrelevant'
+
+            specialization = doctors_spec[doctor]
+
+            new_specs = list(spec_related_data.keys())
+            new_specs.remove(specialization)
+
+            data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
             # if the grants are less than 95% then choose on random whether to
             # give access or no
@@ -424,7 +506,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 else:
                     emergency = 'no'
 
-            csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+            random_patient = random.choice(list(patients_doctor.keys()))
+
+            csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 8:
     # wrong pc and highly irrelevant data
@@ -448,6 +532,14 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
         # print(grants)
+        data_type = 'irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
         # if the grants are less than 75% then choose on random whether to
         # give access or no
@@ -469,8 +561,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 emergency = 'no'
 
         random_pc = random.choice(list(doctors_pc.keys()))
+        random_patient = random.choice(list(patients_doctor.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': doctors_pc[random_pc], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     # average case 9:
     # wrong time and highly irrelevant data
@@ -499,6 +592,14 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
         # print(grants)
+        data_type = 'irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
         # if the grants are less than 75% then choose on random whether to
         # give access or no
@@ -518,8 +619,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 emergency = 'yes'
             else:
                 emergency = 'no'
+        random_patient = random.choice(list(patients_doctor.keys()))
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': emergency, 'access_granted': result})
+        csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': doctors_pc[doctor], 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': emergency, 'access_granted': result})
 
     for key in patients_doctor:
 
@@ -542,9 +644,19 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        random_pc = random.choice(non_hospital_macs)
+        data_type = 'irrelevant'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+        random_pc = random.choice(non_hospital_macs)
+        random_patient = random.choice(list(patients_doctor.keys()))
+
+        csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'no'})
 
     # average case 10:
     # outside hospital pc and everything else is good
@@ -569,6 +681,18 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
         # print(grants)
+        data_type = 'slightly-irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+
+        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+        data_requested = data1 + " + " + data2
 
         # if the grants are less than 75% then choose on random whether to
         # give access or no
@@ -589,7 +713,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'slightly-irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 11:
     # outside pc and wrong time
@@ -605,6 +729,12 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         available_hours = [hours_before, hours_before]
 
         hours = random.choice(available_hours)
+
+        data_type = 'relevant'
+
+        specialization = doctors_spec[doctor]
+
+        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
 
         # random minutes
         minutes = random.randint(0, 59)
@@ -639,7 +769,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'relevant', 'emergency': 'no', 'access_granted': 'yes'})
+        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # average case 12:
     # outside pc and highly irrelevant
@@ -664,6 +794,14 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         grants = int(doctors_grants[doctor][1])
         # print(accesses)
         # print(grants)
+        data_type = 'irrelevant'
+
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
         # if the grants are less than 75% then choose on random whether to
         # give access or no
@@ -684,7 +822,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             else:
                 emergency = 'no'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'yes'})
+        random_patient = random.choice(list(patients_doctor.keys()))
+
+        csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'yes'})
 
     # this loop is for the worst case in our training set
     # no doctor will access data from his assigned pcs
@@ -713,6 +853,16 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         # a zero must be appended before it
         time = str(hours).zfill(2) + ":" + str(minutes).zfill(2)
 
-        random_pc = random.choice(non_hospital_macs)
+        data_type = 'irrelevant'
 
-        csv_writer.writerow({'p_id': key, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': 'irrelevant', 'emergency': 'no', 'access_granted': 'no'})
+        specialization = doctors_spec[doctor]
+
+        new_specs = list(spec_related_data.keys())
+        new_specs.remove(specialization)
+
+        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+
+        random_pc = random.choice(non_hospital_macs)
+        random_patient = random.choice(list(patients_doctor.keys()))
+
+        csv_writer.writerow({'p_id': random_patient, 'd_id': doctor, 'location_of_access': random_pc, 'time_of_access': time, 'Specialization': doctors_spec[doctor], 'data_requested': data_requested, 'emergency': 'no', 'access_granted': 'no'})
