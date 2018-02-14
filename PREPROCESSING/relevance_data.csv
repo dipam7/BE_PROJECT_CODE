@@ -1,10 +1,3 @@
-﻿Specialization,Chest,Digestive Sys,Others
-Cardio,1,0.5,0
-,Brain,Back,Others
-Neuro,1,0.5,0
-,Mouth,Face,Others
-Dentist,1,0.5,0
-,Abdomen,Heart,Others
-Gynec,1,0.5,0
-,ENT,Stomach,Others
-Pedia,1,0.5,0
+version https://git-lfs.github.com/spec/v1
+oid sha256:ffeedda8004f194452b4136c317f449a96f75b71f057029b6affa73a05765134
+size 208
