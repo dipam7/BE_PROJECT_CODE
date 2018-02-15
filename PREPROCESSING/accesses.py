@@ -1,9 +1,6 @@
 import random
 from test_for_uniqueness import *
 
-# you still have to add cases where patient is not assigned to the
-# doc but data is accessed
-
 emergency = ''
 
 with open('generated_access_data.csv', 'w') as csv_write_file:
@@ -278,7 +275,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
-            data_requested = data1 + " + " + data2
+            data_requested = data1 + "+" + data2
 
             # if the grants are less than 90% then choose on random whether to
             # give access or no
@@ -341,7 +338,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
-        data_requested = data1 + " + " + data2
+        data_requested = data1 + "+" + data2
 
         # if the grants are less than 95% then choose on random whether to
         # give access or no
@@ -407,7 +404,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
-        data_requested = data1 + " + " + data2
+        data_requested = data1 + "+" + data2
 
         # if the grants are less than 95% then choose on random whether to
         # give access or no
@@ -692,7 +689,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
 
-        data_requested = data1 + " + " + data2
+        data_requested = data1 + "+" + data2
 
         # if the grants are less than 75% then choose on random whether to
         # give access or no

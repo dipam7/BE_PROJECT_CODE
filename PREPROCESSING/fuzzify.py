@@ -1,6 +1,7 @@
 import csv
 import re
 import pandas as pd
+import random
 from test_for_uniqueness import *
 
 access_granted = []
@@ -29,6 +30,7 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
     time_of_access_column = csv_reader1.time_of_access
     d_id_column = csv_reader1.d_id
     location_of_access_column = csv_reader1.location_of_access
+    specialization_column = csv_reader1.Specialization
 
     d_id2_column = csv_reader2.d_id
     accesses_column = csv_reader2.Accesses
@@ -37,36 +39,49 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
 
     index = 0
 
-    for i in emergency_column:  # emergency column
-
+    # normalize emergency
+    for i in emergency_column:
         if i == "yes":
             emergency.append(1)
-
         else:
             emergency.append(0)
 
-    for i in data_requested_column:  # data requested column
-
-        if i == "relevant":
+    # use sensitivity score along with data relevance
+    # for this column
+    for i, j in zip(data_requested_column, specialization_column):
+        if i in spec_related_data[j][0]:
             data_requested.append(1)
+        elif "+" in i:
+            temp = i.split('+')
+            # we have to find the spec where temp[1]
+            # is and not the one where j is
+            for k in specialization_column:
+                if temp[1] in spec_related_data[k][0]:
+                    score = spec_related_data[k][1]
+                    # print(score)
+                    break
 
-        elif i == "slightly-irrelevant":
-            data_requested.append(0.5)
-
+            if float(score) < 0.5:
+                data_requested.append(0.7)
+            else:
+                data_requested.append(0.3)
         else:
             data_requested.append(0)
 
-    for i in access_granted_column:  # access granted column
-
+        # normalize output lable
+    for i in access_granted_column:
         if i == "yes":
             access_granted.append(1)
-
         else:
             access_granted.append(0)
 
+    # fuzzify previous history as number of grants / accesses
     for i in d_id_column:
-        previous_history.append(int(doctors_grants[i][1]) / int(doctors_grants[i][0]))
+        val = int(doctors_grants[i][1]) / int(doctors_grants[i][0])
+        val = round(val, 2)
+        previous_history.append(val)
 
+    # fuzzify location of access
     for i, j in list(zip(d_id_column, location_of_access_column)):
         if doctors_pc[i] == j:
             location_of_access.append(1)
@@ -75,12 +90,14 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
         else:
             location_of_access.append(0)
 
-    for i in time_of_access_column:  # time of access column
+    # to fuzzify time of access
+    for i in time_of_access_column:
 
         i = re.split('[:]', i)
         if (int)(i[0]) >= 9 and (int)(i[0]) < 22:
             time_of_access.append(1)
-
+        elif ((int)(i[0]) >= 8 and (int)(i[0]) < 9) or ((int)(i[0]) >= 22 and (int)(i[0]) < 23):
+            time_of_access.append(0.5)
         else:
             time_of_access.append(0)
 
