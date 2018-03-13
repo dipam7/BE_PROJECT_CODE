@@ -2,6 +2,8 @@ import uuid
 import random
 import csv
 
+emergency_threshold = 5
+
 # too many dictionaries are storing doctor id and could have been
 # combined, but they were not made at the same stage
 # and combining them now would lead to a lot of changes in a lot of
@@ -18,6 +20,9 @@ doctors_grants = {}
 
 # dictionary for doctor_ids and their specializations
 doctors_spec = {}
+
+# dictionary for doctors and their emergency counts
+doctor_em = {}
 
 mac_addresses = []
 d_ids = []
@@ -51,6 +56,7 @@ with open('generated_doctors_data.csv', 'r', encoding="utf8") as csv_read_file:
         doctors_pc[line['d_id']] = line['Assigned_PC']
         doctors_grants[line['d_id']] = [line['Accesses'], line['Grants']]
         doctors_spec[line['d_id']] = line['Speciality']
+        doctor_em[line['d_id']] = emergency_threshold
         # print(doctors_spec)
         # print(doctors_grants)
         # print(doctors_pc)
@@ -96,3 +102,7 @@ d_ids.extend(p_ids)
 print(len(d_ids))
 d = set(d_ids)
 print(len(d))
+
+
+print(spec_related_data)
+# print(doctor_em)

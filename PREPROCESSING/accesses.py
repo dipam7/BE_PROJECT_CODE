@@ -3,6 +3,8 @@ from test_for_uniqueness import *
 
 emergency = ''
 
+available_data = ['Surgical_history', 'Obsteric', 'Allergy', 'Family_history', 'Dental', 'STD', 'X-rays', 'Blood_test', 'Rehab', 'Consultation_reports','MRI','CT-scan','ECG','EEG']
+
 with open('generated_access_data.csv', 'w') as csv_write_file:
 
     # specify fieldnames
@@ -27,7 +29,10 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             specialization = doctors_spec[doctor]
 
-            data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+            data_set = spec_related_data[specialization][0]
+
+            data_requested = random.sample(set(data_set), 3)
+            # print(data_requested)
 
             # 9 am to 9 pm
             hours = random.randint(9, 20)
@@ -65,7 +70,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             specialization = doctors_spec[doctor]
 
-            data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+            data_set = spec_related_data[specialization][0]
+
+            data_requested = random.sample(set(data_set), 3)
 
             # zfill is used because if minutes is in single digits
             # a zero must be appended before it
@@ -81,7 +88,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             if grants < int(0.75 * accesses):
                 result = random.choice(['yes', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -91,7 +98,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 # probability of no is greater
                 result = random.choice(['yes', 'no', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -130,7 +137,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+        data_set = spec_related_data[specialization][0]
+
+        data_requested = random.sample(set(data_set), 3)
 
         accesses = int(doctors_grants[doctor][0])
         grants = int(doctors_grants[doctor][1])
@@ -142,7 +151,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         if grants < int(0.75 * accesses):
             result = random.choice(['yes', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -152,7 +161,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -196,14 +205,16 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+        data_set = spec_related_data[specialization][0]
+
+        data_requested = random.sample(set(data_set), 3)
 
         # if the grants are less than 80% then choose on random whether to
         # give access or no
         if grants < int(0.8 * accesses):
             result = random.choice(['yes', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -213,7 +224,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -234,7 +245,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+        data_set = spec_related_data[specialization][0]
+
+        data_requested = random.sample(set(data_set), 3)
 
         # zfill is used because if minutes is in single digits
         # a zero must be appended before it
@@ -268,21 +281,20 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             specialization = doctors_spec[doctor]
 
-            new_specs = list(spec_related_data.keys())
-            new_specs.remove(specialization)
+            related_set = spec_related_data[specialization][0]
 
-            data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+            data_set1 = set(available_data) - set(related_set)
 
-            data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+            data_requested = list(random.sample(set(related_set), 2))
 
-            data_requested = data1 + "+" + data2
+            data_requested.append(random.choice(list(data_set1)))
 
             # if the grants are less than 90% then choose on random whether to
             # give access or no
             if grants < int(0.9 * accesses):
                 result = random.choice(['yes', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -292,7 +304,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 # probability of no is greater
                 result = random.choice(['yes', 'no', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -331,21 +343,20 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
 
-        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+        related_set = spec_related_data[specialization][0]
 
-        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+        data_set1 = set(available_data) - set(related_set)
 
-        data_requested = data1 + "+" + data2
+        data_requested = list(random.sample(set(related_set), 2))
 
+        data_requested.append(random.choice(list(data_set1)))
         # if the grants are less than 95% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -355,7 +366,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -397,21 +408,21 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
 
-        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+        related_set = spec_related_data[specialization][0]
 
-        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+        data_set1 = set(available_data) - set(related_set)
 
-        data_requested = data1 + "+" + data2
+        data_requested = list(random.sample(set(related_set), 2))
+
+        data_requested.append(random.choice(list(data_set1)))
 
         # if the grants are less than 95% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -421,7 +432,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -479,17 +490,15 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
             specialization = doctors_spec[doctor]
 
-            new_specs = list(spec_related_data.keys())
-            new_specs.remove(specialization)
+            data_set = set(available_data) - set(related_set)
 
-            data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
-
+            data_requested = random.sample(set(data_set), 3)
             # if the grants are less than 95% then choose on random whether to
             # give access or no
             if grants < int(0.95 * accesses):
                 result = random.choice(['yes', 'no', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -499,7 +508,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
                 # probability of no is greater
                 result = random.choice(['yes', 'no', 'no', 'no'])
                 if result == 'yes':
-                    emergency = 'yes'
+                    emergency = random.choice(['yes','yes','yes','yes','no'])
                 else:
                     emergency = 'no'
 
@@ -533,17 +542,15 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        data_set = set(available_data) - set(related_set)
 
-        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
-
+        data_requested = random.sample(set(data_set), 3)
         # if the grants are less than 75% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -553,7 +560,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -593,17 +600,15 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        data_set = set(available_data) - set(related_set)
 
-        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
-
+        data_requested = random.sample(set(data_set), 3)
         # if the grants are less than 75% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -613,7 +618,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
         random_patient = random.choice(list(patients_doctor.keys()))
@@ -645,10 +650,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        data_set = set(available_data) - set(related_set)
 
-        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+        data_requested = random.sample(set(data_set), 3)
 
         random_pc = random.choice(non_hospital_macs)
         random_patient = random.choice(list(patients_doctor.keys()))
@@ -682,21 +686,19 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        related_set = spec_related_data[specialization][0]
 
-        data1 = spec_related_data[specialization][0][random.choice([0, 1])]
+        data_set1 = set(available_data) - set(related_set)
 
-        data2 = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+        data_requested = list(random.sample(set(related_set), 2))
 
-        data_requested = data1 + "+" + data2
-
+        data_requested.append(random.choice(list(data_set1)))
         # if the grants are less than 75% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -706,7 +708,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -731,7 +733,9 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        data_requested = spec_related_data[specialization][0][random.choice([0, 1])]
+        data_set = spec_related_data[specialization][0]
+
+        data_requested = random.sample(set(data_set), 3)
 
         # random minutes
         minutes = random.randint(0, 59)
@@ -752,7 +756,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -762,7 +766,7 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -795,27 +799,25 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        data_set = set(available_data) - set(related_set)
 
-        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
-
+        data_requested = random.sample(set(data_set), 3)
         # if the grants are less than 75% then choose on random whether to
         # give access or no
         if grants < int(0.95 * accesses):
             result = random.choice(['yes', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
         # but if the grants are less than 30% of accesses
         # never give access
-        if grants < int(0.3 * accesses):
+        if grants < int(0.4 * accesses):
             # probability of no is greater
             result = random.choice(['yes', 'no', 'no', 'no', 'no', 'no'])
             if result == 'yes':
-                emergency = 'yes'
+                emergency = random.choice(['yes','yes','yes','yes','no'])
             else:
                 emergency = 'no'
 
@@ -854,10 +856,11 @@ with open('generated_access_data.csv', 'w') as csv_write_file:
 
         specialization = doctors_spec[doctor]
 
-        new_specs = list(spec_related_data.keys())
-        new_specs.remove(specialization)
+        related_set = spec_related_data[specialization][0]
 
-        data_requested = spec_related_data[random.choice(new_specs)][0][random.choice([0, 1])]
+        data_set = set(available_data) - set(related_set)
+
+        data_requested = random.sample(set(data_set), 3)
 
         random_pc = random.choice(non_hospital_macs)
         random_patient = random.choice(list(patients_doctor.keys()))

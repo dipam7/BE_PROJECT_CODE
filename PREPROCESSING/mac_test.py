@@ -6,7 +6,7 @@ import uuid
 RANGE_OF_ACCESSES = 50000
 
 doctors = []
-specialities = ['Gynec', 'Dentist', 'Pediatrician', 'Neuro', 'Cardio']
+specialities = ['Gynec', 'Dentist', 'Ortho', 'Neuro', 'Cardio']
 non_hospital_macs = []
 
 
