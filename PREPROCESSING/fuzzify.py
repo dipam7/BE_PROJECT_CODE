@@ -89,17 +89,17 @@ with open('generated_fuzzified_access_data.csv', 'w', newline='') as csv_write_f
             location_of_access.append(0.5)
         else:
             location_of_access.append(0)
-
+    print("Done")
     # to fuzzify time of access
     for i in time_of_access_column:
 
         i = re.split('[:]', i)
         if (int)(i[0]) >= 9 and (int)(i[0]) < 22:
             time_of_access.append(1)
-        elif ((int)(i[0]) >= 8 and (int)(i[0]) < 9) or ((int)(i[0]) >= 22 and (int)(i[0]) < 23):
-            time_of_access.append(0.5)
+        elif ((int)(i[0]) < 9):
+            time_of_access.append(round((int)(i[0])/9,2))
         else:
-            time_of_access.append(0)
+            time_of_access.append(round((23-(int)(i[0]))/3,2))
 
         csv_writer.writerow({'data_requested': data_requested[index], 'location_of_access': location_of_access[index], 'time_of_access': time_of_access[index], 'emergency': emergency[index], 'previous_history': previous_history[index], 'access_granted': access_granted[index]})
         index = index + 1
